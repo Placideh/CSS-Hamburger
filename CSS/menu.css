@@ -1,0 +1,186 @@
+.menu-wrap {
+	position: fixed;
+	top:0;
+	left:0;
+	z-index:1;/*this helps us to make sure that it is on 
+	the top */
+}
+.menu-wrap .toggler {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:2;
+	cursor:pointer;
+	width: 50px;
+	height: 50px;
+	opacity:0;	
+}
+.menu-wrap .hamburger {
+	position: absolute;
+	top:0;
+	left:0;
+	z-index:1;
+	width:60px;
+	height: 60px;
+	padding:1rem;
+	background-color:var(--primary-color);
+	/*so for this in order to able to know that 
+	it will grab that color even though we did not 
+	defined in out menu.css is that if we look up 
+	on index.html our style.css is above the menu.css
+	this is the reason why it will be taking that 
+	effect or property*/
+	display: flex;
+	align-items:center;
+	justify-content: center;
+}
+/*hamburger lines*/
+.menu-wrap .hamburger > div {
+	position: relative;
+	width:100%;
+	height: 2px;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content:center;
+	transition:all 0.4s ease;
+
+}
+/*  so to be able to have the other
+two lines then we will be having 
+that menu-wrap .hamburger and 
+be able to set up a hover before and after */
+ .menu-wrap .hamburger >div:before, 
+.menu-wrap .hamburger >div:after {
+	content:'';
+	position: absolute;
+	z-index:1;
+	top:-10px;
+	width:100%;
+	height: 2px;
+	background-color: inherit;
+/*so when you save like this you are going 
+actually see two hamburger but it is 
+three so inorder to show that third one we will be using
+top property on the div after to positive 10px*/
+} 
+.menu-wrap .hamburger >div:after{
+	top:10px;
+	/*so with that it is where we are going to see
+	that third humberger*/
+}
+/*Toggler animate*/
+/*remeber because we have setted this to 
+a checkbox so once we click on that then 
+that line will pop up and int css 
+that checkbox has that property of checked state*/
+.menu-wrap .toggler:checked + .hamburger>div {
+	transform: rotate(135deg);
+
+}
+/*Turn line into X when we clicked on that humberger*/
+.menu-wrap .toggler:checked + .hamburger>div:before,
+.menu-wrap .toggler:checked + .hamburger>div:after {  
+	top:0;
+	transform:rotate(90deg);
+
+
+}
+/*rotate on hove when checked*/
+.menu-wrap .toggler:checked:hover + .hamburger>div {
+	transform: rotate(225deg);
+}
+/*SHOW MENU*/
+/*so here we are going to do some couples styles
+so that to show us an affect when the humburger is clicked
+*/
+
+.menu-wrap .toggler:checked ~ .menu {
+	visibility: visible;
+}
+.menu-wrap .toggler:checked ~ .menu > div {
+	transform: scale(1);
+	transition-duration: var(--menu-speed);
+}
+.menu-wrap .toggler:checked ~ .menu > div > div {
+	opacity: 1;
+	transition: opacity 0.4s ease;
+
+}
+
+/*Now we going to be targetting the links and add
+some styles it*/
+.menu-wrap .menu {
+	position:fixed; 
+	top:0;
+	left:0;
+	width: 100%;
+	height:100%;
+	visibility:hidden;/*this we uncommented it*/
+	overflow: hidden;
+	display: flex;
+	align-items:center;
+	justify-content: center;
+		/*so as for now when we save for this 
+		only properties above then the menu will
+		be in the middle and will be seen but we 
+		are goint to be fixing that */
+}
+
+/*now let target the immediate div*/
+.menu-wrap .menu >div {
+	background:var(--overlay-color);
+	border-radius: 50%;
+	width: 200vw;
+	height: 200vw;
+	display: flex;
+	flex:none;
+	align-items: center;
+	justify-content: center;
+	transform: scale(0);/*this we uncommented it
+	*/
+	/*so with this transform scale 
+	it help us to not see that menu 
+	when it is setted at scale of 0 but 
+	we will want to see it if our check box is checked,
+	but at this time our menu the overlayed*/
+
+	/*this helps to transition smoothly*/
+	transition:all 0.4s ease;
+
+}
+/*Now we are going to target the immediate second 
+div*/
+ .menu-wrap .menu > div >div {
+	text-align: center;
+	max-width: 90vw;
+	/*vw :view point width*/
+	max-height:100vh;
+	/*vh:view point height*/
+
+	opacity:0;/*this we uncommented it*/
+
+	transition: opacity 0.4s ease;
+} 
+/*now we are going to target our 
+links so that they don't have to be pupple 
+and also having that bullet point */
+.menu-wrap .menu > div > div > ul > li {
+	list-style: none;
+	color:#fff;
+	font-size: 1.5rem;
+	padding: 1rem;
+}
+.menu-wrap .menu > div > div > ul > li > a {
+	color:inherit;
+	text-decoration:none;
+	transition: color 0.4s ease;
+}
+/* now everything is sette so what we want to 
+do is to uncomment some properties that we 
+commented before to be able to view what we 
+are doing and those properties was:
+1.transform: scale(0)
+2.visibility:hidden;
+3.opacity:0;
+*/
